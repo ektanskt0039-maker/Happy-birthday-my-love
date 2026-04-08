@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Love ❤️</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body {
+            background: #0f0f0f;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: white;
+            position: relative;
+        }
+
+        .bg-overlay {
+            position: absolute; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #1a0a1a 0%, #000000 100%);
+            z-index: -2;
+        }
+
+        .bg-text {
+            position: absolute; color: rgba(255, 133, 162, 0.2);
+            font-weight: bold; font-size: 30px; z-index: -1;
+            white-space: nowrap; user-select: none;
+            animation: moveText linear infinite;
+        }
+        @keyframes moveText {
+            0% { transform: translate(-120%, -120%) rotate(-10deg); }
+            100% { transform: translate(120%, 120%) rotate(10deg); }
+        }
+        .t1 { top: 5%; left: 0%; animation-duration: 4s; }
+        .t2 { top: 15%; right: 0%; animation-duration: 6s; }
+        .t3 { top: 30%; left: 10%; animation-duration: 3.5s; }
+        .t4 { top: 45%; right: 15%; animation-duration: 5s; }
+        .t5 { top: 60%; left: 5%; animation-duration: 4.5s; }
+        .t6 { top: 75%; right: 10%; animation-duration: 5.5s; }
+        .t7 { bottom: 5%; left: 20%; animation-duration: 3s; }
+        .t8 { bottom: 15%; right: 5%; animation-duration: 4.8s; }
+        .t9 { bottom: 25%; left: 15%; animation-duration: 6.5s; }
+        .t10 { top: 40%; left: 50%; animation-duration: 5.2s; }
+
+        #cake-step { text-align: center; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .cake { position: relative; width: 250px; height: 200px; cursor: pointer; margin: 20px auto; }
+        .plate { width: 300px; height: 100px; background-color: #e0e0e0; border-radius: 50%; position: absolute; bottom: -20px; left: -25px; box-shadow: 0 8px 15px rgba(0,0,0,0.2); }
+        .layer { position: absolute; width: 250px; height: 120px; background-color: #6d4c41; border-radius: 50% / 30px; bottom: 0; box-shadow: 0 10px 0 #4e342e; }
+        .icing { position: absolute; width: 250px; height: 80px; background-color: #fff9c4; border-radius: 50%; top: 50px; z-index: 2; }
+        .candle { position: absolute; width: 15px; height: 60px; background: repeating-linear-gradient(45deg, #ff5252, #ff5252 5px, #ffffff 5px, #ffffff 10px); top: 10px; left: 50%; transform: translateX(-50%); z-index: 3; border-radius: 3px; }
+        .flame { position: absolute; width: 20px; height: 35px; background: orange; border-radius: 50% 50% 35% 35%; top: -35px; left: -2.5px; box-shadow: 0 0 20px #ffeb3b, 0 0 40px #ff9800; animation: flicker 0.1s infinite alternate; }
+        
+        #blow-gif { display: none; width: 92%; max-width: 320px; border-radius: 20px; margin-top: 10px; }
+        #surprise-btn { display: none; margin-top: 20px; }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 25px;
+            border-radius: 24px;
+            width: 92%;
+            max-width: 420px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: none;
+            animation: slideIn 0.5s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .active { display: block !important; }
+
+        h1 { color: #ff85a2; margin-bottom: 15px; font-size: 24px; }
+        p { line-height: 1.6; font-size: 15px; margin-bottom: 20px; color: #f0f0f0; }
+        .memory-img, .letter-img { width: 100%; border-radius: 15px; margin-bottom: 15px; border: 2px solid #ff85a2; display: block; }
+        .display-box { min-height: 100px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 15px; margin-bottom: 20px; border: 1px dashed #ff85a2; font-size: 18px; font-weight: bold; color: #ffdae0; }
+        .btn { background: linear-gradient(45deg, #ff4d6d, #ff85a2); color: white; border: none; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-weight: 600; margin-top: 10px; text-decoration: none; display: inline-block; }
+
+        #final-letter-box { display: none; background: #ffffff; color: #000000 !important; padding: 20px; border-radius: 15px; text-align: center; border-top: 8px solid #e95f55; margin-top: 20px; }
+        .letter-content p { color: #000000 !important; font-weight: 500; font-size: 15px; margin-bottom: 12px; text-align: center; }
+
+        .heart { position: absolute; background: #ff4d6d; width: 15px; height: 15px; transform: rotate(45deg); animation: float 5s infinite linear; opacity: 0.4; pointer-events: none; }
+        .heart::before, .heart::after { content: ''; width: 15px; height: 15px; background: #ff4d6d; border-radius: 50%; position: absolute; }
+        .heart::before { left: -7.5px; } .heart::after { top: -7.5px; }
+        
+        @keyframes float { 0% { transform: translateY(110vh) rotate(45deg); } 100% { transform: translateY(-10vh) rotate(45deg); } }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body onclick="playSong()">
+
+    <audio id="bday-song" preload="auto">
+        <source src="https://image2url.com/r2/default/audio/1770712092595-c7557267-e7b4-44fd-8898-d8b20519bc7b.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="bg-overlay"></div>
+    <script>
+        for(let i=1; i<=10; i++) document.write(`<div class="bg-text t${i}">You are mine ❤️</div>`);
+    </script>
+
+    <div id="cake-step">
+        <h1 id="cake-msg" style="color: #ff85a2; font-size: 24px; margin-bottom: 10px;">Candle te touch karo babes 🎂</h1>
+        <div class="cake" id="main-cake" onclick="blowCandle()">
+            <div class="plate"></div><div class="layer"></div><div class="icing"></div>
+            <div class="candle"><div class="flame" id="flame"></div></div>
+        </div>
+        <img id="blow-gif" src="https://image2url.com/r2/default/gifs/1770711067212-dab9218e-5737-46ef-9926-31086d779cc5.gif">
+        <button id="surprise-btn" class="btn" onclick="startSurprise()">Click for Surprise ❤️</button>
+    </div>
+
+    <div class="card" id="step1">
+        <img src="https://i.ibb.co/h1XJxvyn/IMG-20260207-WA0004.jpg" class="memory-img">
+        <h1>A Surprise for You...</h1>
+        <button class="btn" onclick="nextStep(2)">Open it ❤️</button>
+    </div>
+
+    <div class="card" id="step2">
+        <h1>Happy Birthday lovee ❤️</h1>
+        <p>Happy Birthday to the most special person in my life. You make my world brighter just by being in it. I’m so lucky to love you and call you mine. 💖 Thank you for being my happiness, my peace, and my favorite person. I hope your day is as amazing as your smile. 🎂💫</p>
+        <button class="btn" onclick="nextStep(3)">See More...</button>
+    </div>
+
+    <div class="card" id="step3">
+        <h1>Things I Adore...</h1>
+        <div id="adore-display" class="display-box">Ready? 👇</div>
+        <button class="btn" id="adore-btn" onclick="showNextAdore()">Click this Jaan 👆</button>
+        <button class="btn" id="next-btn" style="display:none" onclick="nextStep(4)">Wait, One More...</button>
+    </div>
+
+    <div class="card" id="step4">
+        <img src="https://i.ibb.co/mC8jXpS9/IMG-20260207-WA0004.jpg" class="memory-img">
+        <p>On your birthday, I just want to remind you how much you mean to me. You are not just my boyfriend, you are my best friend, my support, and my heart. I’m grateful for you every single day. ❤️</p>
+        <button class="btn" onclick="nextStep(5)">Final Gift 📩</button>
+    </div>
+
+    <div class="card" id="step5">
+        <h1>My Heart For You ❤️</h1>
+        <div id="letter-trigger" style="font-size:70px; cursor:pointer; animation: pulse 1.5s infinite;" onclick="openLetter()">📩</div>
+        <p id="click-hint" style="margin-top: 10px; font-weight: bold; color: #ff85a2;">Letter for my baby, tap on this</p>
+        <div id="final-letter-box">
+            <div class="letter-content">
+                <h2 style="color: #e95f55;">To my Heart, ❤️</h2>
+                <p>I just wanted to take a moment to tell you how much I truly appreciate having you in my life.</p>
+                <p>You are my safe place and my world. Every moment with you feels like a gift.</p>
+                <p>Thank you for being the kind, patient, and incredible man that you are. Loveee youu endless.</p>
+                <h3 style="color: #e95f55;">Happy Birthday Jaan! ❤️</h3>
+            </div>
+            <button class="btn" onclick="nextStep(6)" style="margin-top:15px">Click for special letter ❤️</button>
+        </div>
+    </div>
+
+    <div class="card" id="step6">
+        <h2 style="color: #ff85a2; margin-bottom: 10px;">My Heart on Paper... ❤️</h2>
+        <img src="https://img.sanishtech.com/u/c0d5a69466aa9380776ff779263630ea.jpg" class="letter-img">
+        <button class="btn" onclick="nextStep(7)">One Last Thing... ❤️</button>
+    </div>
+
+    <div class="card" id="step7">
+        <h1>Just for You ❤️</h1>
+        <video width="100%" style="border-radius:15px; border:2px solid #ff85a2;" controls autoplay loop muted>
+            <source src="https://image2url.com/r2/default/videos/1774874525059-0f2a6311-c949-4f39-a66b-7d92ca337f61.mp4" type="video/mp4">
+        </video>
+        <button class="btn" onclick="nextStep(8)">A Final Dedication... 🎵</button>
+    </div>
+
+    <div class="card" id="step8">
+        <h1>A Song Dedicated to You... 🎵</h1>
+        <p style="margin-bottom: 20px; font-style: italic; color: #ffdae0;">"Tuhade layi ik khaas gaana... ❤️"</p>
+        <a href="https://youtu.be/8sLS2knUa6Y?si=cp6bxT64iqBPmMyo" target="_blank" class="btn">Listen to Your Song 🎵</a>
+        <h3 style="color: #ffdae0; margin-top: 25px;">Once again happy birthday Jaan ❤️</h3>
+        <button class="btn" onclick="location.reload()" style="margin-top:20px">Restart Surprise ❤️</button>
+    </div>
+
+    <script>
+        const song = document.getElementById('bday-song');
+        function playSong() { if (song.paused && document.getElementById('cake-step').style.display !== 'none') song.play(); }
+        function blowCandle() { 
+            song.pause(); song.currentTime = 0; song.src = ""; 
+            document.getElementById('flame').style.display = 'none';
+            document.getElementById('main-cake').style.display = 'none';
+            document.getElementById('cake-msg').innerHTML = "🎉 Happy Birthday! 🥳";
+            document.getElementById('blow-gif').style.display = "block";
+            document.getElementById('surprise-btn').style.display = "block";
+        }
+        function startSurprise() { document.getElementById('cake-step').style.display = 'none'; nextStep(1); }
+
+        const adorePoints = [
+            "The way you care, even about small things ❤️",
+            "Your smile — it fixes my mood instantly 😊",
+            "Your patience with my mood swings ⏳",
+            "The way you make me feel safe 🛡️",
+            "Your voice — my favorite sound 🗣️",
+            "How you calm me down when I’m overthinking ☁️",
+            "The way you say my name ✨",
+            "Your hugs — my comfort place 🫂",
+            "How you respect me 🤝",
+            "The effort you put into us 💖",
+            "The way you make ordinary days special ☀️",
+            "Simply… the way you love me ❤️"
+        ];
+        let aIdx = 0;
+        function showNextAdore() {
+            const d = document.getElementById('adore-display');
+            if (aIdx < adorePoints.length) {
+                d.innerText = adorePoints[aIdx++];
+                if (aIdx === adorePoints.length) { document.getElementById('adore-btn').style.display = 'none'; document.getElementById('next-btn').style.display = 'inline-block'; }
+            }
+        }
+        function openLetter() {
+            document.getElementById('letter-trigger').style.display = 'none';
+            document.getElementById('click-hint').style.display = 'none';
+            document.getElementById('final-letter-box').style.display = 'block';
+        }
+        function nextStep(s) { document.querySelectorAll('.card').forEach(c => c.classList.remove('active')); document.getElementById('step'+s).classList.add('active'); }
+        setInterval(() => {
+            const h = document.createElement('div'); h.classList.add('heart');
+            h.style.left = Math.random()*100+'vw'; h.style.animationDuration = Math.random()*2+3+'s';
+            document.body.appendChild(h); setTimeout(() => h.remove(), 5000);
+        }, 400);
+    </script>
+</body>
+  </html>
